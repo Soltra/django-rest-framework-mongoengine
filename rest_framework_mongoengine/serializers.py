@@ -2,6 +2,7 @@ import copy
 import warnings
 from collections import OrderedDict, namedtuple
 
+from django_mongoengine.fields import ObjectIdField as dme_ObjectIdField
 from mongoengine import fields as me_fields
 from mongoengine.errors import ValidationError as me_ValidationError
 from rest_framework import fields as drf_fields
@@ -124,7 +125,8 @@ class DocumentSerializer(serializers.ModelSerializer):
         me_fields.GeoPointField: drfm_fields.GeoPointField,
         me_fields.GeoJsonBaseField: drfm_fields.GeoJSONField,
         me_fields.DynamicField: drfm_fields.DynamicField,
-        me_fields.BaseField: drfm_fields.DocumentField
+        me_fields.BaseField: drfm_fields.DocumentField,
+        dme_ObjectIdField: drfm_fields.ObjectIdField  # New
     }
 
     # induct failure if they occasionally used somewhere
